@@ -21,13 +21,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 
-//导入element-plus
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
 //导入
 import VuecmfEditor from "vue-vuecmf-editor"
 
-createApp(App).use(ElementPlus).use(VuecmfEditor).mount('#app')
+createApp(App).use(VuecmfEditor).mount('#app')
 ```
 ###2、在模板中使用
 ```
@@ -39,6 +36,7 @@ createApp(App).use(ElementPlus).use(VuecmfEditor).mount('#app')
       :content="contentHtml"
       @on-change="getContent"
       height="400px"
+      size="default"
   ></vuecmf-editor>
   
   <button @click="save">保存</button>

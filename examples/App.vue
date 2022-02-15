@@ -6,6 +6,7 @@
       :content="contentHtml"
       @on-change="getContent"
       height="400px"
+      size="default"
   ></vuecmf-editor>
   <button @click="save">保存</button>
 
