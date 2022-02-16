@@ -192,7 +192,7 @@
     <div class="about">
       <strong>Vuecmf editor</strong>
       <div>HTML5富文本编辑器</div>
-      <div>版本：1.2.2</div>
+      <div>版本：1.2.4</div>
       <div>基于MIT开源协议</div>
       <div>特别感谢：<a href="https://v3.cn.vuejs.org" target="_blank">vuejs</a>, <a href="https://element-plus.org" target="_blank">Element Plus</a>, <a href="https://fontawesome.com" target="_blank">Font Awesome</a><br> </div>
       <div>&copy; 2022 <a href="http://www.vuecmf.com" target="_blank">www.vuecmf.com</a> All rights reserved.</div>
