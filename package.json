@@ -1,6 +1,6 @@
 {
   "name": "vue-vuecmf-editor",
-  "version": "1.2.0",
+  "version": "1.2.3",
   "description": "基于vue3+typescript+element plus的HTML5富文本编辑器",
   "main": "packages/index.ts",
   "keyword": "vue-vuecmf-editor vuecmf-editor vuecmf 富文本编辑器",

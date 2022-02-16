@@ -86,10 +86,18 @@ export default defineComponent({
   ></vuecmf-editor>
 ```
 ### 属性
+#### id
+编辑器id
+
+#### size
+编辑器中工具条大小样式，默认default, 可选（large, small）
+
 #### content 
-编辑器内容。 
+编辑器内容。
+
 #### height 
 编辑器高度
+
 #### tools
 编辑器工具条设置
 <br>heading  标题</br>

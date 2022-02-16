@@ -77,7 +77,7 @@ export default class Service {
      * @param content  编辑器内容
      * @param emit  emit对象
      */
-    constructor(id: Ref<[StringConstructor] extends [Prop<infer V, infer D>] ? (unknown extends infer V ? IfAny<V, V, D> : V) : StringConstructor | undefined> | undefined, content: Ref<[StringConstructor] extends [Prop<infer V, infer D>] ? (unknown extends infer V ? IfAny<V, V, D> : V) : (StringConstructor | undefined)> | undefined, emit: EmitFn<EE[]>, tools?: [StringConstructor] extends [Prop<infer V, infer D>] ? (unknown extends infer V ? IfAny<V, V, D> : V) : StringConstructor | undefined) {
+    constructor(id: Ref<[StringConstructor] extends [Prop<infer V, infer D>] ? (unknown extends infer V ? IfAny<V, V, D> : V) : (StringConstructor | undefined)> | undefined, content: Ref<[StringConstructor] extends [Prop<infer V, infer D>] ? (unknown extends infer V ? IfAny<V, V, D> : V) : (StringConstructor | undefined)> | undefined, emit: EmitFn<EE[]>, tools?: string | undefined) {
         console.log('vuecmf-editor service init')
         this.content = content
         this.eventService = new EventService(id, this.editor_ref, emit)
@@ -152,7 +152,7 @@ export default class Service {
         if(typeof tools != 'undefined' && tools.trim() != ''){
             const tool_cfg: VuecmfEditor.AnyObject = []
             const tool_arr = tools.trim().split(',')
-            tool_arr.forEach((item,key) => {
+            tool_arr.forEach((item: string, key: number) => {
                 let val = item.trim()
                 if(val == 'font-size'){
                     val = 'text-height'

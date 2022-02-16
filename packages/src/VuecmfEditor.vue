@@ -53,7 +53,7 @@
   </div>
   <div
       class="content"
-      :style="'height:'+ height"
+      :style="'width:100%; height:'+ height"
       contenteditable
       ref="editor_ref"
   >
@@ -192,7 +192,7 @@
     <div class="about">
       <strong>Vuecmf editor</strong>
       <div>HTML5富文本编辑器</div>
-      <div>版本：1.2.0</div>
+      <div>版本：1.2.2</div>
       <div>基于MIT开源协议</div>
       <div>特别感谢：<a href="https://v3.cn.vuejs.org" target="_blank">vuejs</a>, <a href="https://element-plus.org" target="_blank">Element Plus</a>, <a href="https://fontawesome.com" target="_blank">Font Awesome</a><br> </div>
       <div>&copy; 2022 <a href="http://www.vuecmf.com" target="_blank">www.vuecmf.com</a> All rights reserved.</div>
@@ -210,11 +210,34 @@ import { defineProps, defineEmits, toRefs } from 'vue';
 import Service from "./Service";
 
 const props = defineProps({
-  id: String,
-  content: String,
-  height: String,
-  tools: String,
-  size: String,
+  //编辑器ID
+  id: {
+    type: String,
+    required: true
+  },
+  //编辑器内容
+  content: {
+    type: String,
+    default: ''
+  },
+  //编辑器高度
+  height: {
+    type: String,
+    default: '300px'
+  },
+  //自定义工具条， 多个英文逗号分隔
+  tools: {
+    type: String,
+    default: ''
+  },
+  //编辑器中按钮、输入框的统一大小样式
+  size: {
+    type: String,
+    default: 'default',
+    validator: function (value:string) {
+      return ['default', 'large', 'small'].indexOf(value) !== -1
+    }
+  }
 })
 const emit = defineEmits(['onChange'])
 const { id, content, height, tools } = toRefs(props)
