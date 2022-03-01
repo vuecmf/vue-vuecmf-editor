@@ -1,6 +1,6 @@
 {
   "name": "vue-vuecmf-editor",
-  "version": "1.2.4",
+  "version": "1.3.0",
   "description": "基于vue3+typescript+element plus的HTML5富文本编辑器",
   "main": "packages/index.ts",
   "keyword": "vue-vuecmf-editor vuecmf-editor vuecmf 富文本编辑器",
@@ -23,7 +23,8 @@
     "core-js": "^3.6.5",
     "element-plus": "^2.0.2",
     "register-service-worker": "^1.7.1",
-    "vue": "^3.2.0"
+    "vue": "^3.2.0",
+    "vue-vuecmf-dialog": "^1.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.18.0",

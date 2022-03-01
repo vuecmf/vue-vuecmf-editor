@@ -60,147 +60,162 @@
   </div>
 
   <!-- 添加超链接对话框 -->
-  <el-dialog v-model="link_dlg" title="添加超链接">
-    <el-form :size="size" :inline="true">
-      <el-form-item label="链接地址">
-        <el-input :size="size" v-model="link_url" placeholder="请以http://或https://开头"></el-input>
-      </el-form-item>
-      <el-form-item label="打开方式">
-        <el-select v-model="link_target" placeholder="请选择" :size="size">
-          <el-option label="新窗口" value="_blank"></el-option>
-          <el-option label="当前窗口" value="_self"></el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
+  <vuecmf-dialog :model_value="link_dlg" title="添加超链接" @updateVisible="showLinkDlg">
+    <template #content>
+      <el-form :size="size" :inline="true">
+        <el-form-item label="链接地址">
+          <el-input :size="size" v-model="link_url" placeholder="请以http://或https://开头"></el-input>
+        </el-form-item>
+        <el-form-item label="打开方式">
+          <el-select v-model="link_target" placeholder="请选择" :size="size">
+            <el-option label="新窗口" value="_blank"></el-option>
+            <el-option label="当前窗口" value="_self"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </template>
     <template #footer>
       <el-button type="default" :size="size"  @click="link_dlg = false">取消</el-button>
       <el-button type="primary" :size="size"  @click="linkEvent">确定</el-button>
     </template>
-  </el-dialog>
+  </vuecmf-dialog>
 
   <!-- 插入表格对话框 -->
-  <el-dialog v-model="table_dlg" title="插入表格">
-    <el-form :size="size" :inline="true">
-      <fieldset>
-        <legend>表格</legend>
-        <el-form-item label="宽度">
-          <el-input-number v-model="table_width" :precision="0" :step="1" :min="1"  />
-        </el-form-item>
-        <el-form-item label="行数">
-          <el-input-number v-model="table_row" :precision="0" :step="1" :min="1"  />
-        </el-form-item>
-        <el-form-item label="列数">
-          <el-input-number v-model="table_col" :precision="0" :step="1" :min="1"  />
-        </el-form-item>
-        <el-form-item label="边框">
-          <el-color-picker v-model="table_border_color" :size="size"  show-alpha :predefine="predefine_colors"  />
-        </el-form-item>
-      </fieldset>
+  <vuecmf-dialog :model_value="table_dlg" title="插入表格" @updateVisible="showTableDlg">
+    <template #content>
+      <el-form :size="size" :inline="true">
+        <fieldset>
+          <legend>表格</legend>
+          <el-form-item label="宽度">
+            <el-input-number v-model="table_width" :precision="0" :step="1" :min="1"  />
+          </el-form-item>
+          <el-form-item label="行数">
+            <el-input-number v-model="table_row" :precision="0" :step="1" :min="1"  />
+          </el-form-item>
+          <el-form-item label="列数">
+            <el-input-number v-model="table_col" :precision="0" :step="1" :min="1"  />
+          </el-form-item>
+          <el-form-item label="边框">
+            <el-color-picker v-model="table_border_color" :size="size"  show-alpha :predefine="predefine_colors"  />
+          </el-form-item>
+        </fieldset>
 
-      <fieldset>
-        <legend>列头</legend>
-        <el-form-item>
-          <el-select v-model="table_head" placeholder="请选择" :size="size">
-            <el-option label="无" value=""></el-option>
-            <el-option label="第一行" value="first_row"></el-option>
-            <el-option label="第一列" value="first_col"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="背景色">
-          <el-color-picker v-model="table_head_bg_color" :size="size"  show-alpha :predefine="predefine_colors"  />
-        </el-form-item>
-        <el-form-item label="文字颜色">
-          <el-color-picker v-model="table_head_color" :size="size"  show-alpha :predefine="predefine_colors"  />
-        </el-form-item>
-      </fieldset>
-    </el-form>
+        <fieldset>
+          <legend>列头</legend>
+          <el-form-item>
+            <el-select v-model="table_head" placeholder="请选择" :size="size">
+              <el-option label="无" value=""></el-option>
+              <el-option label="第一行" value="first_row"></el-option>
+              <el-option label="第一列" value="first_col"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="背景色">
+            <el-color-picker v-model="table_head_bg_color" :size="size"  show-alpha :predefine="predefine_colors"  />
+          </el-form-item>
+          <el-form-item label="文字颜色">
+            <el-color-picker v-model="table_head_color" :size="size"  show-alpha :predefine="predefine_colors"  />
+          </el-form-item>
+        </fieldset>
+      </el-form>
+    </template>
+
     <template #footer>
       <el-button type="default" :size="size"  @click="table_dlg = false">取消</el-button>
       <el-button type="primary" :size="size"  @click="insertTableEvent">确定</el-button>
     </template>
-  </el-dialog>
+  </vuecmf-dialog>
 
   <!-- 插入图片 -->
-  <el-dialog v-model="image_dlg" title="插入图片">
-    <el-form :size="size" :inline="true">
-      <el-form-item label="地址">
-        <el-input :size="size" v-model="image_url" placeholder="请以http://或https://开头"></el-input>
-      </el-form-item>
-      <el-form-item label="宽度">
-        <el-input-number v-model="image_width" :precision="0" :step="1" :min="1" />
-      </el-form-item>
-      <el-form-item label="高度">
-        <el-input-number v-model="image_height" :precision="0" :step="1" :min="1" />
-      </el-form-item>
-      <el-form-item label="对齐">
-        <el-select v-model="image_align" placeholder="请选择" :size="size">
-          <el-option label="左对齐" value="left"></el-option>
-          <el-option label="右对齐" value="right"></el-option>
-          <el-option label="顶对齐" value="top"></el-option>
-          <el-option label="居中对齐" value="middle"></el-option>
-          <el-option label="底对齐" value="bottom"></el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
+  <vuecmf-dialog :model_value="image_dlg" title="插入图片" @updateVisible="showImageDlg">
+    <template #content>
+      <el-form :size="size" :inline="true">
+        <el-form-item label="地址">
+          <el-input :size="size" v-model="image_url" placeholder="请以http://或https://开头"></el-input>
+        </el-form-item>
+        <el-form-item label="宽度">
+          <el-input-number v-model="image_width" :precision="0" :step="1" :min="1" />
+        </el-form-item>
+        <el-form-item label="高度">
+          <el-input-number v-model="image_height" :precision="0" :step="1" :min="1" />
+        </el-form-item>
+        <el-form-item label="对齐">
+          <el-select v-model="image_align" placeholder="请选择" :size="size">
+            <el-option label="左对齐" value="left"></el-option>
+            <el-option label="右对齐" value="right"></el-option>
+            <el-option label="顶对齐" value="top"></el-option>
+            <el-option label="居中对齐" value="middle"></el-option>
+            <el-option label="底对齐" value="bottom"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </template>
+
     <template #footer>
       <el-button type="default" :size="size"  @click="image_dlg = false">取消</el-button>
       <el-button type="primary" :size="size"  @click="insertImageEvent">确定</el-button>
     </template>
-  </el-dialog>
+  </vuecmf-dialog>
 
   <!-- 插入视频 -->
-  <el-dialog v-model="video_dlg" title="插入视频">
-    <el-form :size="size" :inline="true">
-      <fieldset>
-        <legend>支持三种视频文件格式（MP4、WebM、Ogg）</legend>
-        <el-form-item label="地址">
-          <el-input :size="size" v-model="video_url" placeholder="请以http://或https://开头"></el-input>
-        </el-form-item>
-        <el-form-item label="宽度">
-          <el-input-number v-model="video_width" :precision="0" :step="1" :min="1" />
-        </el-form-item>
-        <el-form-item label="高度">
-          <el-input-number v-model="video_height" :precision="0" :step="1" :min="1" />
-        </el-form-item>
-        <el-form-item label="对齐">
-          <el-select v-model="video_align" placeholder="请选择" :size="size">
-            <el-option label="左对齐" value="left"></el-option>
-            <el-option label="居中对齐" value="center"></el-option>
-            <el-option label="右对齐" value="right"></el-option>
-          </el-select>
-        </el-form-item>
-      </fieldset>
+  <vuecmf-dialog :model_value="video_dlg" title="插入视频" @updateVisible="showVideoDlg">
+    <template #content>
+      <el-form :size="size" :inline="true">
+        <fieldset>
+          <legend>支持三种视频文件格式（MP4、WebM、Ogg）</legend>
+          <el-form-item label="地址">
+            <el-input :size="size" v-model="video_url" placeholder="请以http://或https://开头"></el-input>
+          </el-form-item>
+          <el-form-item label="宽度">
+            <el-input-number v-model="video_width" :precision="0" :step="1" :min="1" />
+          </el-form-item>
+          <el-form-item label="高度">
+            <el-input-number v-model="video_height" :precision="0" :step="1" :min="1" />
+          </el-form-item>
+          <el-form-item label="对齐">
+            <el-select v-model="video_align" placeholder="请选择" :size="size">
+              <el-option label="左对齐" value="left"></el-option>
+              <el-option label="居中对齐" value="center"></el-option>
+              <el-option label="右对齐" value="right"></el-option>
+            </el-select>
+          </el-form-item>
+        </fieldset>
 
-    </el-form>
+      </el-form>
+    </template>
+
     <template #footer>
       <el-button type="default" :size="size"  @click="video_dlg = false">取消</el-button>
       <el-button type="primary" :size="size"  @click="insertVideoEvent">确定</el-button>
     </template>
-  </el-dialog>
+  </vuecmf-dialog>
 
   <!-- 插入代码 -->
-  <el-dialog v-model="code_dlg" title="插入代码">
-    <el-input v-model="code_content" :rows="5" type="textarea" placeholder="请输入内容" />
+  <vuecmf-dialog :model_value="code_dlg" title="插入代码" @updateVisible="showCodeDlg">
+    <template #content>
+      <el-input v-model="code_content" :rows="5" type="textarea" placeholder="请输入内容" />
+    </template>
     <template #footer>
       <el-button type="default" :size="size"  @click="code_dlg = false">取消</el-button>
       <el-button type="primary" :size="size"  @click="insertCodeEvent">确定</el-button>
     </template>
-  </el-dialog>
+  </vuecmf-dialog>
 
   <!-- 关于对话框 -->
-  <el-dialog v-model="about_dlg" title="关于">
-    <div class="about">
-      <strong>Vuecmf editor</strong>
-      <div>HTML5富文本编辑器</div>
-      <div>版本：1.2.4</div>
-      <div>基于MIT开源协议</div>
-      <div>特别感谢：<a href="https://v3.cn.vuejs.org" target="_blank">vuejs</a>, <a href="https://element-plus.org" target="_blank">Element Plus</a>, <a href="https://fontawesome.com" target="_blank">Font Awesome</a><br> </div>
-      <div>&copy; 2022 <a href="http://www.vuecmf.com" target="_blank">www.vuecmf.com</a> All rights reserved.</div>
-    </div>
+  <vuecmf-dialog :model_value="about_dlg" title="关于" @updateVisible="showAboutDlg">
+    <template #content>
+      <div class="about">
+        <strong>Vuecmf editor</strong>
+        <div>HTML5富文本编辑器</div>
+        <div>版本：1.3.0</div>
+        <div>基于MIT开源协议</div>
+        <div>特别感谢：<a href="https://v3.cn.vuejs.org" target="_blank">vuejs</a>, <a href="https://element-plus.org" target="_blank">Element Plus</a>, <a href="https://fontawesome.com" target="_blank">Font Awesome</a><br> </div>
+        <div>&copy; 2022 <a href="http://www.vuecmf.com" target="_blank">www.vuecmf.com</a> All rights reserved.</div>
+      </div>
+    </template>
     <template #footer>
       <div class="about"><el-button type="default" :size="size"  @click="about_dlg = false">关闭</el-button></div>
     </template>
-  </el-dialog>
+  </vuecmf-dialog>
 
 
 
@@ -294,6 +309,13 @@ const insertTableEvent = service.insertTableEvent
 const insertImageEvent = service.insertImageEvent
 const insertVideoEvent = service.insertVideoEvent
 const insertCodeEvent = service.insertCodeEvent
+
+const showLinkDlg = () => link_dlg.value = false
+const showTableDlg = () => table_dlg.value = false
+const showImageDlg = () => image_dlg.value = false
+const showVideoDlg = () => video_dlg.value = false
+const showCodeDlg = () => code_dlg.value = false
+const showAboutDlg = () => about_dlg.value = false
 
 //初始化编辑器
 service.init()
@@ -389,5 +411,11 @@ fieldset{
   }
 }
 
+</style>
+
+<style lang="scss">
+.el-color-picker__trigger{
+  border: 0px solid #e6e6e6 !important;
+}
 </style>
 
