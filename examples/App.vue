@@ -1,5 +1,5 @@
 <template>
-  <h3>vuecmf-table demo</h3>
+  <h3>vuecmf-editor demo</h3>
 
   <vuecmf-editor
       id="myeditor"
